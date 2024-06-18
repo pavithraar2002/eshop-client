@@ -47,7 +47,7 @@ import toast from "react-hot-toast";
   //get payment gateway token
   const getToken = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/braintree/token");
+      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/braintree/token`);
       setClientToken(data?.clientToken);
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ import toast from "react-hot-toast";
     try {
      setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      await axios.post("/api/v1/product/braintree/payment", {
+      await axios.post(`${process.env.REACT_APP_API}/api/v1/product/braintree/payment`, {
         nonce,
         cart,
       });
@@ -106,7 +106,7 @@ import toast from "react-hot-toast";
                 <div className="row card flex-row my-2" key={p._id}>
                   <div className="col-md-4 my-2">
                     <img 
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100px"
